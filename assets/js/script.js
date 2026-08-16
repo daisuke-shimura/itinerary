@@ -6,24 +6,6 @@ function closeModal(modalId) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  function resizeBook() {
-    const wrapper = document.getElementById('book-wrapper');
-    if (!wrapper) return;
-
-    const bookWidth = 794;
-    const screenWidth = window.innerWidth;
-
-    let scale = (screenWidth - 20) / bookWidth;
-    if (scale > 1) scale = 1;
-
-    wrapper.style.transformOrigin = 'top center';
-    wrapper.style.transform = `scale(${scale})`;
-    wrapper.style.height = `${1123 * scale}px`;
-  }
-
-  window.addEventListener('resize', resizeBook);
-  resizeBook();
-
   const pages = document.querySelectorAll('.page');
   let currentPage = 0; 
 
