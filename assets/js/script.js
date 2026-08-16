@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     maxShadowOpacity: 0,
     swipeDistance: 80,
     clickEventForward: true,
-    disableFlipByClick: true
   });
 
   pageFlip.loadFromHTML(document.querySelectorAll('.page'));
@@ -59,10 +58,18 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('btn-prev').addEventListener('click', () => {
-    pageFlip.flipPrev();
+    const current = pageFlip.getCurrentPageIndex();
+    if (current > 0) {
+      pageFlip.flip(current - 1);
+    }
   });
+
   document.getElementById('btn-next').addEventListener('click', () => {
-    pageFlip.flipNext();
+    const current = pageFlip.getCurrentPageIndex();
+    const total = pageFlip.getPageCount();
+    if (current < total - 1) {
+      pageFlip.flip(current + 1);
+    }
   });
 
   const tocItems = document.querySelectorAll('.toc-item');
@@ -78,4 +85,13 @@ document.addEventListener('DOMContentLoaded', function() {
     iframe.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
     iframe.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
   });
+
+  document.getElementById('book').addEventListener('click', (e) => {
+    const screenWidth = window.innerWidth;
+    const clickX = e.clientX;
+    if (clickX > screenWidth * 0.2 && clickX < screenWidth * 0.8) {
+      e.stopPropagation(); 
+      e.preventDefault();
+    }
+  }, true);
 });
