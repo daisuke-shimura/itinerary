@@ -43,7 +43,7 @@ body {
 main {
   width: 100%;
   display: flex;
-  justify-content: center; /* 左右中央に配置 */
+  justify-content: center;
   align-items: center;
 }
 

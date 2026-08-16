@@ -12,8 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
     size: "fixed",
     showCover: false,
     usePortrait: true,
-    mobileScrollSupport: false, 
+    mobileScrollSupport: true,
     maxShadowOpacity: 0,
+    swipeDistance: 80,
+    clickEventForward: true,
+    disableFlipByClick: true
   });
 
   pageFlip.loadFromHTML(document.querySelectorAll('.page'));
@@ -69,5 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const targetPage = parseInt(item.getAttribute('data-page'), 10);
       pageFlip.flip(targetPage); 
     });
+  });
+
+  document.querySelectorAll('iframe').forEach(iframe => {
+    iframe.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+    iframe.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
   });
 });
