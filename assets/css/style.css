@@ -66,7 +66,7 @@ main {
   height: 297mm;
   min-height: 0;
   margin: 20px auto;
-  padding: 60px 40px !important; 
+  padding: 60px !important; 
   background-color: var(--bg-color) !important;
 }
 
