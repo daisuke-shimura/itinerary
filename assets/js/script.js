@@ -12,10 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
     size: "fixed",
     showCover: false,
     usePortrait: true,
-    mobileScrollSupport: true,
-    maxShadowOpacity: 0,
-    swipeDistance: 80,
-    clickEventForward: true,
+
+    useMouseEvents: false,
+
+    // mobileScrollSupport: true,
+    // maxShadowOpacity: 0,
+    // swipeDistance: 80,
+    // clickEventForward: true,
   });
 
   pageFlip.loadFromHTML(document.querySelectorAll('.page'));
