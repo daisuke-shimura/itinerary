@@ -1,4 +1,3 @@
-// モーダルの開閉処理（そのまま）
 function openModal(modalId) {
   document.getElementById(modalId).classList.add('is-active');
 }
@@ -7,29 +6,38 @@ function closeModal(modalId) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  function resizeBook() {
+    const wrapper = document.getElementById('book-wrapper');
+    if (!wrapper) return;
+
+    const bookWidth = 794;
+    const screenWidth = window.innerWidth;
+
+    let scale = (screenWidth - 20) / bookWidth;
+    if (scale > 1) scale = 1;
+
+    wrapper.style.transformOrigin = 'top center';
+    wrapper.style.transform = `scale(${scale})`;
+    wrapper.style.height = `${1123 * scale}px`;
+  }
+
+  window.addEventListener('resize', resizeBook);
+  resizeBook();
+
   const pages = document.querySelectorAll('.page');
-  let currentPage = 0; // 今開いているページの番号（0が1ページ目）
+  let currentPage = 0; 
 
-  // 指定したページを表示する関数
   function showPage(index) {
-    // 一旦すべてのページを非表示にする
     pages.forEach(page => page.classList.remove('is-active'));
-    // 目的のページだけを表示する
     pages[index].classList.add('is-active');
-
-    // プルダウンの表示も合わせる
     document.getElementById('page-selector').value = index;
-
-    // ページ遷移したときに画面の一番上に戻るようにする（スマホで読みやすくするため）
     window.scrollTo(0, 0);
   }
 
-  // 最初に1ページ目を表示
   if (pages.length > 0) {
     showPage(currentPage);
   }
 
-  // プルダウン（目次）の生成
   const pageSelector = document.getElementById('page-selector');
   const totalPagesSpan = document.getElementById('total-pages');
   totalPagesSpan.textContent = `/ ${pages.length}`;
@@ -41,13 +49,11 @@ document.addEventListener('DOMContentLoaded', function() {
     pageSelector.appendChild(option);
   }
 
-  // プルダウンを変更したときの遷移
   pageSelector.addEventListener('change', (e) => {
     currentPage = parseInt(e.target.value, 10);
     showPage(currentPage);
   });
 
-  // 前へボタン
   document.getElementById('btn-prev').addEventListener('click', () => {
     if (currentPage > 0) {
       currentPage--;
@@ -55,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // 次へボタン
   document.getElementById('btn-next').addEventListener('click', () => {
     if (currentPage < pages.length - 1) {
       currentPage++;
@@ -63,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // 目次リンク（.toc-item）からの遷移
   const tocItems = document.querySelectorAll('.toc-item');
   tocItems.forEach(item => {
     item.addEventListener('click', (e) => {
@@ -71,5 +75,29 @@ document.addEventListener('DOMContentLoaded', function() {
       currentPage = parseInt(item.getAttribute('data-page'), 10);
       showPage(currentPage);
     });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('button, a, select, input, iframe, .modal, .toc-item')) {
+      return; 
+    }
+
+    const screenWidth = window.innerWidth;
+    const clickX = e.clientX;
+    const edgeArea = screenWidth * 0.15; 
+
+    if (clickX < edgeArea) {
+      
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    } else if (clickX > screenWidth - edgeArea) {
+      
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    }
   });
 });
