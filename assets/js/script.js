@@ -119,4 +119,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // 真ん中付近をタップした場合は何もしない（中の要素は通常通り反応する）
   });
+
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    const current = pageFlip.getCurrentPageIndex();
+    if (current > 0) {
+      pageFlip.flip(current - 1);
+    }
+  });
+  
+  document.getElementById('btn-next').addEventListener('click', () => {
+    const current = pageFlip.getCurrentPageIndex();
+    const total = pageFlip.getPageCount();
+    if (current < total - 1) {
+      pageFlip.flip(current + 1);
+    }
+  });
 });
