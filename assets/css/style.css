@@ -59,6 +59,17 @@ main {
   page-break-after: always;
   position: relative;
   overflow: hidden;
+  display: none;
+}
+
+.page.is-active {
+  display: block;
+  animation: fadeIn 0.3s ease; /* フワッと表示させる */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .map-page {
