@@ -1,3 +1,4 @@
+// モーダルの開閉処理（そのまま）
 function openModal(modalId) {
   document.getElementById(modalId).classList.add('is-active');
 }
@@ -6,116 +7,69 @@ function closeModal(modalId) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // 1. PageFlipの初期化
-  const pageFlip = new St.PageFlip(document.getElementById('book'), {
-    width: 794,
-    height: 1123,
-    size: "fixed",
-    showCover: false,
-    usePortrait: true,
-    mobileScrollSupport: true,
-    maxShadowOpacity: 0,
-    disableFlipByClick: true // 全画面でのタップめくりだけをオフ
-  });
+  const pages = document.querySelectorAll('.page');
+  let currentPage = 0; // 今開いているページの番号（0が1ページ目）
 
-  pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+  // 指定したページを表示する関数
+  function showPage(index) {
+    // 一旦すべてのページを非表示にする
+    pages.forEach(page => page.classList.remove('is-active'));
+    // 目的のページだけを表示する
+    pages[index].classList.add('is-active');
 
-  // 2. 画面リサイズ対応
-  function resizeBook() {
-    const wrapper = document.getElementById('book-wrapper');
-    const bookWidth = 794;
-    const screenWidth = window.innerWidth;
-    let scale = (screenWidth - 20) / bookWidth;
-    if (scale > 1) scale = 1;
-    wrapper.style.transform = `scale(${scale})`;
-    wrapper.style.height = `${1123 * scale}px`;
+    // プルダウンの表示も合わせる
+    document.getElementById('page-selector').value = index;
+
+    // ページ遷移したときに画面の一番上に戻るようにする（スマホで読みやすくするため）
+    window.scrollTo(0, 0);
   }
-  window.addEventListener('resize', resizeBook);
-  resizeBook();
 
-  // 3. セレクトボックス（目次）の設定
+  // 最初に1ページ目を表示
+  if (pages.length > 0) {
+    showPage(currentPage);
+  }
+
+  // プルダウン（目次）の生成
   const pageSelector = document.getElementById('page-selector');
   const totalPagesSpan = document.getElementById('total-pages');
-  const totalPages = pageFlip.getPageCount();
-  totalPagesSpan.textContent = `/ ${totalPages}`;
+  totalPagesSpan.textContent = `/ ${pages.length}`;
 
-  for (let i = 0; i < totalPages; i++) {
+  for (let i = 0; i < pages.length; i++) {
     const option = document.createElement('option');
     option.value = i;
     option.text = (i + 1);
     pageSelector.appendChild(option);
   }
-  pageFlip.on('flip', (e) => {
-    pageSelector.value = e.data; 
-  });
+
+  // プルダウンを変更したときの遷移
   pageSelector.addEventListener('change', (e) => {
-    const targetPage = parseInt(e.target.value, 10);
-    pageFlip.flip(targetPage);
+    currentPage = parseInt(e.target.value, 10);
+    showPage(currentPage);
   });
 
-  // 4. 前へ・次へボタンの処理
+  // 前へボタン
   document.getElementById('btn-prev').addEventListener('click', () => {
-    pageFlip.flipPrev();
-  });
-  document.getElementById('btn-next').addEventListener('click', () => {
-    pageFlip.flipNext();
+    if (currentPage > 0) {
+      currentPage--;
+      showPage(currentPage);
+    }
   });
 
-  // 5. 目次リンクからのページ遷移
+  // 次へボタン
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (currentPage < pages.length - 1) {
+      currentPage++;
+      showPage(currentPage);
+    }
+  });
+
+  // 目次リンク（.toc-item）からの遷移
   const tocItems = document.querySelectorAll('.toc-item');
   tocItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
-      const targetPage = parseInt(item.getAttribute('data-page'), 10);
-      pageFlip.flip(targetPage); 
+      currentPage = parseInt(item.getAttribute('data-page'), 10);
+      showPage(currentPage);
     });
-  });
-
-  // -----------------------------------------------------
-  // 6. ★最重要★ ライブラリの「タッチ横取り」からボタン類を守るバリア
-  // -----------------------------------------------------
-  const interactives = document.querySelectorAll('button, a, select, input, iframe, .modal, .toc-item');
-  interactives.forEach(el => {
-    // 指やマウスで触れた瞬間に「ライブラリには渡さない！」とブロックする
-    el.addEventListener('pointerdown', (e) => e.stopPropagation());
-    el.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
-  });
-
-  // -----------------------------------------------------
-  // 7. ★自作★ 端っこ15%タップ判定（スワイプと区別する賢い処理）
-  // -----------------------------------------------------
-  let startX = 0;
-  let startY = 0;
-  const bookEl = document.getElementById('book');
-
-  // 指を置いた場所を記録
-  bookEl.addEventListener('pointerdown', (e) => {
-    startX = e.clientX;
-    startY = e.clientY;
-  });
-
-  // 指を離した時に判定
-  bookEl.addEventListener('pointerup', (e) => {
-    const endX = e.clientX;
-    const endY = e.clientY;
-
-    // 指が動いた距離が10px未満なら「スワイプではなく、ただのタップ」とみなす
-    if (Math.abs(endX - startX) < 10 && Math.abs(endY - startY) < 10) {
-      
-      // もしボタンやマップの上をタップしていたら、めくり処理は中止
-      if (e.target.closest('button, a, select, input, iframe, .modal, .toc-item')) {
-        return;
-      }
-
-      const screenWidth = window.innerWidth;
-      const edgeArea = screenWidth * 0.15; // 左右15%の幅
-
-      // めっちゃ端っこならページをめくる
-      if (endX < edgeArea) {
-        pageFlip.flipPrev();
-      } else if (endX > screenWidth - edgeArea) {
-        pageFlip.flipNext();
-      }
-    }
   });
 });
