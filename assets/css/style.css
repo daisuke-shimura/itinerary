@@ -30,6 +30,10 @@
   --danger-bg: #FDF5F5;
 }
 
+html, body {
+  -webkit-text-size-adjust: 100%; /* これを追加 */
+  text-size-adjust: 100%;         /* これを追加 */
+}
 
 body {
   color: var(--text-color);
@@ -673,26 +677,26 @@ main {
 .page-navigation {
   position: fixed;
   left: 50%;
-  bottom: 20px;
+  bottom: 40px; 
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px;
+  gap: 12px;     
+  padding: 12px; 
   background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(201, 224, 239, 0.8);
+  border: 2px solid rgba(201, 224, 239, 0.8); 
   border-radius: 999px;
   box-shadow:
-    0 4px 16px rgba(0, 59, 128, 0.18),
-    0 1px 4px rgba(0, 0, 0, 0.08);
+    0 8px 32px rgba(0, 59, 128, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
 }
 
 .page-nav-button {
-  width: 42px;
-  height: 42px;
+  width: 84px;  
+  height: 84px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -719,19 +723,19 @@ main {
 }
 
 .page-nav-button .icon {
-  width: 22px;
-  height: 22px;
+  width: 44px;  
+  height: 44px; 
   fill: currentColor;
 }
 
 .page-indicator {
-  height: 42px;
+  height: 84px;  
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 14px;
+  padding: 0 28px; 
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 28px; 
   font-weight: 600;
   white-space: nowrap;
 }
@@ -742,14 +746,14 @@ main {
   outline: none;
   background: transparent;
   color: var(--primary-color);
-  font-size: 16px;
+  font-size: 32px; 
   font-weight: 700;
   cursor: pointer;
 }
 
 #total-pages {
-  margin-left: 4px;
+  margin-left: 8px;
   color: var(--text-muted);
-  font-size: 13px;
+  font-size: 26px;
   font-weight: 500;
 }
