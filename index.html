@@ -16,12 +16,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://daisuke-shimura.github.io/itinerary/">
   <meta property="og:image" content="https://daisuke-shimura.github.io/itinerary/assets/img/ogp.jpg">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://maps.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; frame-src https://www.google.com;">
 </head>
 <body>
   <main>
     <!-- 表紙 -->
     <div class="page front-cover-page">
-      <img src="assets/img/cover/handwritten.webp" class="cover-image image1" alt="表紙1">
+      <img src="assets/img/cover/handwritten.webp" class="cover-image image1" alt="表紙1" fetchpriority="high">
       <img src="assets/img/cover/front.webp" class="cover-image image2" alt="表紙2">
     </div>
 
