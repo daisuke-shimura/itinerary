@@ -10,7 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
   let currentPage = 0; 
 
   function showPage(index) {
-    pages.forEach(page => page.classList.remove('is-active'));
+    const currentActive = document.querySelector('.page.is-active');
+    if (currentActive) {
+      currentActive.classList.remove('is-active');
+    }
     pages[index].classList.add('is-active');
 
     const coverImages = pages[index].querySelectorAll('.image1, .image2');
@@ -18,14 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (coverImages.length > 0) {
       coverImages.forEach(image => {
         image.style.animation = 'none';
-      });
-  
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          coverImages.forEach(image => {
-            image.style.animation = '';
-          });
-        });
+        void image.offsetWidth; 
+        image.style.animation = '';
       });
     }
   
@@ -41,12 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const totalPagesSpan = document.getElementById('total-pages');
   totalPagesSpan.textContent = `/ ${pages.length}`;
 
+  const fragment = document.createDocumentFragment();
   for (let i = 0; i < pages.length; i++) {
     const option = document.createElement('option');
     option.value = i;
     option.text = (i + 1);
-    pageSelector.appendChild(option);
+    fragment.appendChild(option);
   }
+  pageSelector.appendChild(fragment);
 
   pageSelector.addEventListener('change', (e) => {
     currentPage = parseInt(e.target.value, 10);
@@ -86,13 +85,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const edgeArea = screenWidth * 0.15; 
 
     if (clickX < edgeArea) {
-      
       if (currentPage > 0) {
         currentPage--;
         showPage(currentPage);
       }
     } else if (clickX > screenWidth - edgeArea) {
-      
       if (currentPage < pages.length - 1) {
         currentPage++;
         showPage(currentPage);
