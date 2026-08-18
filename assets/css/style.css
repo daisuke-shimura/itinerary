@@ -51,6 +51,10 @@ main {
   align-items: center;
 }
 
+button, a, select, input, .toc-item {
+  touch-action: manipulation;
+}
+
 /* 本用に変更 */
 .page {
   width: 794px !important;
