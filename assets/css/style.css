@@ -625,15 +625,24 @@ main {
 
 .modal-close {
   position: absolute;
-  top: -40px;
-  right: 0;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+
   color: #fff;
-  font-size: 30px;
-  font-weight: bold;
   cursor: pointer;
   background: none;
   border: none;
-  padding: 5px 0 5px 5px;
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close .icon {
+  width: 40px;
+  height: 40px;
 }
 
 @keyframes fadeIn {
