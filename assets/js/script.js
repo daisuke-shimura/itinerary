@@ -12,6 +12,23 @@ document.addEventListener('DOMContentLoaded', function() {
   function showPage(index) {
     pages.forEach(page => page.classList.remove('is-active'));
     pages[index].classList.add('is-active');
+
+    const coverImages = pages[index].querySelectorAll('.image1, .image2');
+  
+    if (coverImages.length > 0) {
+      coverImages.forEach(image => {
+        image.style.animation = 'none';
+      });
+  
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          coverImages.forEach(image => {
+            image.style.animation = '';
+          });
+        });
+      });
+    }
+  
     document.getElementById('page-selector').value = index;
     window.scrollTo(0, 0);
   }
