@@ -491,11 +491,11 @@ button, a, select, input, .toc-item {
 }
 
 .image1 {
-  animation: fade1 10s infinite;
+  animation: fade1 14s infinite;
 }
 
 .image2 {
-  animation: fade2 10s infinite;
+  animation: fade2 14s infinite;
 }
 
 @keyframes fade1 {
