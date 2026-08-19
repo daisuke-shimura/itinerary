@@ -595,6 +595,18 @@ button, a, select, input, .toc-item {
   margin-left: 10px;
 }
 
+.toc-item.is-current {
+  background-color: rgba(95, 169, 214, 0.15); 
+  color: var(--accent-color);
+  border-bottom: 2px dashed var(--accent-color);
+}
+
+.toc-item.is-current svg {
+  fill: var(--accent-color);
+  transform: translateX(-4px) scale(1.2); 
+  transition: transform 0.2s ease;
+}
+
 /* ハンバーガーメニュー */
 .hamburger-btn {
   position: fixed;

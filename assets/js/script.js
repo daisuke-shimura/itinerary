@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
     document.getElementById('page-selector').value = index;
     window.scrollTo(0, 0);
+
+    const allTocItems = document.querySelectorAll('.toc-item');
+    allTocItems.forEach(item => {
+      item.classList.remove('is-current');
+      
+      if (parseInt(item.getAttribute('data-page'), 10) === index) {
+        item.classList.add('is-current');
+      }
+    });
   }
 
   if (pages.length > 0) {
