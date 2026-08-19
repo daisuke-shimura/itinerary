@@ -523,83 +523,152 @@
 
     <!-- 裏表紙 -->
     <div class="page back-cover-page"></div>
-
-    <!-- モーダル -->
-    <div id="villa" class="modal-overlay" onclick="closeModal('villa')">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal('villa')" aria-label="閉じる">
-          <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-        <img src="assets/img/confirmation/villa.webp" alt="青庭予約確認" width="918" height="1075" loading="lazy">
-      </div>
-    </div>
-
-    <div id="car" class="modal-overlay" onclick="closeModal('car')">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal('car')" aria-label="閉じる">
-          <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-        <img src="assets/img/confirmation/car.webp" alt="ニコニコレンタカー予約確認" width="1084" height="719" loading="lazy">
-      </div>
-    </div>
-
-    <div id="canyoning" class="modal-overlay" onclick="closeModal('canyoning')">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal('canyoning')" aria-label="閉じる">
-          <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-        <img src="assets/img/confirmation/canyonig.webp" alt="キャニオニング予約確認" width="828" height="683" loading="lazy">
-      </div>
-    </div>
-
-    <!--施設画像-->
-    <div id="villa_outside" class="modal-overlay" onclick="closeModal('villa_outside')">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal('villa_outside')" aria-label="閉じる">
-          <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-        <img src="assets/img/villa/outside.webp" alt="外観写真" width="1080" height="720" loading="lazy">
-      </div>
-    </div>
-
-    <div id="villa_floor" class="modal-overlay" onclick="closeModal('villa_floor')">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal('villa_floor')" aria-label="閉じる">
-          <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-        <img src="assets/img/villa/floor.webp" alt="間取り図" width="1000" height="707" loading="lazy">
-      </div>
-    </div>
-
-    <div id="villa_wi-fi" class="modal-overlay" onclick="closeModal('villa_wi-fi')">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal('villa_wi-fi')" aria-label="閉じる">
-          <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
-        <img src="assets/img/villa/wi-fi.webp" alt="Wi-Fi情報" width="1080" height="1527" loading="lazy">
-      </div>
-    </div>
-
-    <!-- ページナビゲーション -->
-    <div class="page-navigation">
-      <button id="btn-prev" class="page-nav-button" aria-label="前のページ">
-        <svg class="icon" viewBox="0 -960 960 960">
-          <path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z"/>
-        </svg>
-      </button>
-
-      <div class="page-indicator">
-        <select id="page-selector" aria-label="ページを選択"></select>
-        <span id="total-pages">/ -</span>
-      </div>
-
-      <button id="btn-next" class="page-nav-button" aria-label="次のページ">
-        <svg class="icon" viewBox="0 -960 960 960">
-          <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/>
-        </svg>
-      </button>
-    </div>
   </main>
+
+  <!-- ページナビゲーション -->
+  <nav class="page-navigation" aria-label="ページナビゲーション">
+    <button id="btn-prev" class="page-nav-button" aria-label="前のページ">
+      <svg class="icon" viewBox="0 -960 960 960">
+        <path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z"/>
+      </svg>
+    </button>
+
+    <div class="page-indicator">
+      <select id="page-selector" aria-label="ページを選択"></select>
+      <span id="total-pages">/ -</span>
+    </div>
+
+    <button id="btn-next" class="page-nav-button" aria-label="次のページ">
+      <svg class="icon" viewBox="0 -960 960 960">
+        <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- モーダル -->
+  <div id="villa" class="modal-overlay" onclick="closeModal('villa')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('villa')" aria-label="閉じる">
+        <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+      </button>
+      <img src="assets/img/confirmation/villa.webp" alt="青庭予約確認" width="918" height="1075" loading="lazy">
+    </div>
+  </div>
+
+  <div id="car" class="modal-overlay" onclick="closeModal('car')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('car')" aria-label="閉じる">
+        <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+      </button>
+      <img src="assets/img/confirmation/car.webp" alt="ニコニコレンタカー予約確認" width="1084" height="719" loading="lazy">
+    </div>
+  </div>
+
+  <div id="canyoning" class="modal-overlay" onclick="closeModal('canyoning')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('canyoning')" aria-label="閉じる">
+        <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+      </button>
+      <img src="assets/img/confirmation/canyonig.webp" alt="キャニオニング予約確認" width="828" height="683" loading="lazy">
+    </div>
+  </div>
+
+  <!--施設画像-->
+  <div id="villa_outside" class="modal-overlay" onclick="closeModal('villa_outside')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('villa_outside')" aria-label="閉じる">
+        <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+      </button>
+      <img src="assets/img/villa/outside.webp" alt="外観写真" width="1080" height="720" loading="lazy">
+    </div>
+  </div>
+
+  <div id="villa_floor" class="modal-overlay" onclick="closeModal('villa_floor')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('villa_floor')" aria-label="閉じる">
+        <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+      </button>
+      <img src="assets/img/villa/floor.webp" alt="間取り図" width="1000" height="707" loading="lazy">
+    </div>
+  </div>
+
+  <div id="villa_wi-fi" class="modal-overlay" onclick="closeModal('villa_wi-fi')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('villa_wi-fi')" aria-label="閉じる">
+        <svg class="icon" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+      </button>
+      <img src="assets/img/villa/wi-fi.webp" alt="Wi-Fi情報" width="1080" height="1527" loading="lazy">
+    </div>
+  </div>
+
+  <!-- ハンバーガーメニュー -->
+  <button id="btn-hamburger" class="hamburger-btn">
+    <svg class="icon" viewBox="0 -960 960 960"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+  </button>
+  <div id="toc-sidebar" class="toc-sidebar">
+    <div class="toc-container">
+      <button class="toc-item" data-page="0">
+        <div>1. 表紙</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+      
+      <button class="toc-item" data-page="1">
+        <div>2. 目次</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="2">
+        <div>3. 1日目</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="3">
+        <div>4. 1日目（地図）</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="4">
+        <div>5. 2日目</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="5">
+        <div>6. 2日目（地図）</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="6">
+        <div>7. 3日目</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="7">
+        <div>8. 3日目（地図）</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="8">
+        <div>9. インフォメーション</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="9">
+        <div>10. 交通費の詳細</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="10">
+        <div>11. 宿舎情報</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+  
+      <button class="toc-item" data-page="11">
+        <div>12. 裏表紙</div>
+        <svg viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="toc-overlay" class="toc-overlay"></div>
 
   <script src="assets/js/script.js" defer></script>
 </body>

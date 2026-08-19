@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showPage(currentPage);
   }
 
+  // セレクトボックスの生成
   const pageSelector = document.getElementById('page-selector');
   const totalPagesSpan = document.getElementById('total-pages');
   totalPagesSpan.textContent = `/ ${pages.length}`;
@@ -66,17 +67,42 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+
+  // ハンバーガーメニュー
+  const btnHamburger = document.getElementById('btn-hamburger');
+  const btnCloseToc = document.getElementById('btn-close-toc');
+  const tocSidebar = document.getElementById('toc-sidebar');
+  const tocOverlay = document.getElementById('toc-overlay');
+
+  function closeToc() {
+    if(tocSidebar) tocSidebar.classList.remove('is-open');
+    if(tocOverlay) tocOverlay.classList.remove('is-active');
+  }
+
+  if(btnHamburger) {
+    btnHamburger.addEventListener('click', () => {
+      tocSidebar.classList.add('is-open');
+      tocOverlay.classList.add('is-active');
+    });
+  }
+
+  if(btnCloseToc) btnCloseToc.addEventListener('click', closeToc);
+  if(tocOverlay) tocOverlay.addEventListener('click', closeToc);
+
   const tocItems = document.querySelectorAll('.toc-item');
   tocItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       currentPage = parseInt(item.getAttribute('data-page'), 10);
       showPage(currentPage);
+      closeToc();
     });
   });
 
+
+  // 画面端のクリック
   document.addEventListener('click', (e) => {
-    if (e.target.closest('button, a, select, input, iframe, .modal, .toc-item')) {
+    if (e.target.closest('button, a, select, input, iframe, .modal, .toc-item, .hamburger-btn, .toc-overlay')) {
       return; 
     }
 

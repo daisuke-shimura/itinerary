@@ -564,7 +564,6 @@ button, a, select, input, .toc-item {
   font-family: inherit;
   cursor: pointer;
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -596,7 +595,74 @@ button, a, select, input, .toc-item {
   margin-left: 10px;
 }
 
+/* ハンバーガーメニュー */
+.hamburger-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+  padding: 8px;
+  cursor: pointer;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 59, 128, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
 
+.hamburger-btn .icon {
+  width: 28px;
+  height: 28px;
+  fill: var(--primary-color);
+}
+
+.toc-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: fit-content; 
+  min-width: 250px;
+  max-width: 85vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: var(--bg-color); 
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  transform: translateX(calc(100% + 15px)); 
+  transition: transform 0.3s ease; 
+  z-index: 1000;
+  padding: 10px 20px 40px;
+  overflow-y: auto;
+}
+
+.toc-sidebar.is-open {
+  transform: translateX(0); 
+}
+
+.toc-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+.toc-overlay.is-active {
+  display: block;
+}
+
+#toc-sidebar .toc-item {
+  gap: 24px;
+}
+#toc-sidebar .toc-item svg {
+  flex-shrink: 0;
+}
+
+/* モーダル */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -732,7 +798,7 @@ button, a, select, input, .toc-item {
   color: #3988A5;
 }
 
-
+/* ページナビゲーション */
 .page-navigation {
   position: fixed;
   left: 50%;
