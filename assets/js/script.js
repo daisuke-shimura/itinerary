@@ -132,3 +132,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/itinerary/sw.js')
+      .then((registration) => {
+        console.log('ServiceWorker の登録が成功しました', registration.scope);
+      })
+      .catch((error) => {
+        console.log('ServiceWorker の登録に失敗しました', error);
+      });
+  });
+}
