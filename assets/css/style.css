@@ -31,8 +31,8 @@
 }
 
 html, body {
-  -webkit-text-size-adjust: 100%; /* これを追加 */
-  text-size-adjust: 100%;         /* これを追加 */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
