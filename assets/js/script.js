@@ -133,14 +133,25 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Service Workerの登録
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/itinerary/sw.js')
-      .then((registration) => {
-        console.log('ServiceWorker の登録が成功しました', registration.scope);
-      })
-      .catch((error) => {
-        console.log('ServiceWorker の登録に失敗しました', error);
+  navigator.serviceWorker.register('/sw.js').then((registration) => {
+    
+    if (registration.active && !registration.installing) {
+      console.log('すでにあるService Workerが元気に動いています（更新なし）');
+    }
+
+    registration.addEventListener('updatefound', () => {
+      const newWorker = registration.installing;
+      console.log('新しいService Workerをインストール中...');
+ 
+      newWorker.addEventListener('statechange', () => {
+        if (newWorker.state === 'installed') {
+          console.log('新しいService Workerの準備（キャッシュの保存など）が完了しました！');          
+        }
       });
+    });
+  }).catch((error) => {
+    console.error('登録に失敗しました:', error);
   });
 }
