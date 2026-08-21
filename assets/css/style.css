@@ -72,7 +72,7 @@ button, a, select, input, .toc-item {
 
 .page.is-active {
   display: block;
-  animation: fadeIn 0.3s ease; /* フワッと表示させる */
+  animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
