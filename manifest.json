@@ -2,6 +2,7 @@
   "name": "2026年夏季合宿",
   "short_name": "2026年夏季合宿",
   "start_url": "/itinerary/",
+  "orientation": "portrait",
   "display": "standalone",
   "background_color": "#F2F8FC",
   "theme_color": "#003B80",
